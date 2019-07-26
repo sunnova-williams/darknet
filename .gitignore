@@ -42,3 +42,13 @@ src/version.h
 lib/
 share/
 include/darknet/
+
+
+# custom
+*.txt
+*.jpg
+backup
+cfg
+*.names
+OUT*
+darknet

@@ -783,13 +783,13 @@ void free_detections(detection *dets, int n)
 // ]
 //},
 
-char *detection_to_json(detection *dets, int nboxes, int classes, char **names, long long int frame_id, char *filename)
+char *detection_to_json(detection *dets, int nboxes, int classes, char **names, long long int frame_id, char *filename, float im_width, float im_height)
 {
     const float thresh = 0.005; // function get_network_boxes() has already filtred dets by actual threshold
 
     char *send_buf = (char *)calloc(1024, sizeof(char));
     if (filename) {
-        sprintf(send_buf, "{\n \"frame_id\":%lld, \n \"filename\":\"%s\", \n \"objects\": [ \n", frame_id, filename);
+        sprintf(send_buf, "{\n \"frame_id\":%lld, \n \"filename\":\"%s\", \n \"size\":{\n \"width\": %f, \n \"height\": %f \n   }, \n \"objects\": [ \n", frame_id, filename, im_width, im_height); //RW 7/19 updated for width, height
     }
     else {
         sprintf(send_buf, "{\n \"frame_id\":%lld, \n \"objects\": [ \n", frame_id);
